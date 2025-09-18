@@ -1,13 +1,6 @@
-# TMS Client
+# TMS Token Generator
 
-A React application with Auth0 authentication integration.
-
-## Features
-
-- Auth0 authentication with automatic token storage
-- Protected routing
-- Simple dashboard with "Hello!" message
-- Automatic redirect to dashboard after login
+A React application with Auth0 authentication integration to generate accessToken.
 
 ## Setup
 
@@ -26,11 +19,6 @@ A React application with Auth0 authentication integration.
    npm run dev
    ```
 
-## Pages
-
-- **Login Page** (`/login`): Auth0 login interface
-- **Dashboard** (`/dashboard`): Protected page showing "Hello!" message
-
 ## Authentication Flow
 
 1. User visits the application
@@ -38,4 +26,3 @@ A React application with Auth0 authentication integration.
 3. User clicks "Log In" button to authenticate with Auth0
 4. After successful authentication, access token is saved to localStorage
 5. User is redirected to dashboard
-6. Dashboard displays "Hello!" message with logout option
