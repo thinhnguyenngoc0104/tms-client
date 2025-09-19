@@ -32,14 +32,16 @@ const Auth0ProviderWithHistory = ({ children }) => {
 
 // Component to handle token storage
 const TokenHandler = ({ children }) => {
-  const { getAccessTokenSilently, isAuthenticated, isLoading } = useAuth0();
+  const { getAccessTokenSilently, getIdTokenClaims, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(() => {
     const getToken = async () => {
       if (isAuthenticated && !isLoading) {
         try {
           const token = await getAccessTokenSilently();
+          const idTokenClaims = await getIdTokenClaims();
           localStorage.setItem('accessToken', token);
+          localStorage.setItem('idToken', idTokenClaims.__raw)
         } catch (error) {
           console.error('Error getting access token:', error);
         }
@@ -47,7 +49,7 @@ const TokenHandler = ({ children }) => {
     };
 
     getToken();
-  }, [isAuthenticated, isLoading, getAccessTokenSilently]);
+  }, [isAuthenticated, isLoading, getAccessTokenSilently, getIdTokenClaims]);
 
   return children;
 };
