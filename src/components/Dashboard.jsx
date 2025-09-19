@@ -4,18 +4,19 @@ const Dashboard = () => {
   const { logout, user } = useAuth0();
 
   const handleLogout = () => {
-    logout({ returnTo: window.location.origin });
+    logout({ returnTo: "https://token-generator-gamma.vercel.app" });
   };
+
 
   const accessToken = localStorage.getItem("accessToken");
   const idToken = localStorage.getItem("idToken");
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
       minHeight: '100vh',
       gap: '20px'
     }}>
@@ -23,11 +24,11 @@ const Dashboard = () => {
       {user && (
         <div style={{ textAlign: 'center' }}>
           <p>Welcome, {user.name || user.email}!</p>
-          {accessToken && <p><b>Access Token:</b> {accessToken}</p>}
-          {idToken && <p><b>ID Token:</b> {idToken}</p>}
+          <p><b>Access Token:</b> {accessToken}</p>
+          <p><b>ID Token:</b> {idToken}</p>
         </div>
       )}
-      <button 
+      <button
         onClick={handleLogout}
         style={{
           padding: '12px 24px',
