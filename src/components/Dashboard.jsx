@@ -7,7 +7,8 @@ const Dashboard = () => {
     logout({ returnTo: window.location.origin });
   };
 
-  console.log(localStorage.getItem('accessToken'));
+  const accessToken = localStorage.getItem("accessToken");
+  const idToken = localStorage.getItem("idToken");
 
   return (
     <div style={{ 
@@ -22,6 +23,8 @@ const Dashboard = () => {
       {user && (
         <div style={{ textAlign: 'center' }}>
           <p>Welcome, {user.name || user.email}!</p>
+          {accessToken && <p><b>Access Token:</b> {accessToken}</p>}
+          {idToken && <p><b>ID Token:</b> {idToken}</p>}
         </div>
       )}
       <button 
