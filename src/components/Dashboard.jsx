@@ -1,4 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
+import React, { useState } from "react";
 
 const Dashboard = () => {
   const { logout, user } = useAuth0();
@@ -10,6 +11,15 @@ const Dashboard = () => {
 
   const accessToken = localStorage.getItem("accessToken");
   const idToken = localStorage.getItem("idToken");
+
+  const [copied, setCopied] = useState("");
+
+  const handleCopy = (text, label) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(`${label} copied!`);
+      setTimeout(() => setCopied(""), 2000);
+    });
+  };
 
   return (
     <div style={{
@@ -24,8 +34,16 @@ const Dashboard = () => {
       {user && (
         <div style={{ textAlign: 'center' }}>
           <p>Welcome, {user.name || user.email}!</p>
-          <p><b>Access Token:</b> {accessToken}</p>
-          <p><b>ID Token:</b> {idToken}</p>
+          <div style={{ padding: "20px" }}>
+            <p onClick={() => handleCopy(accessToken, "Access Token")} style={{ cursor: "pointer" }}>
+              <b>Access Token:</b> <br /> {accessToken}
+            </p>
+            <br />
+            <p onClick={() => handleCopy(idToken, "ID Token")} style={{ cursor: "pointer" }}>
+              <b>ID Token:</b> {idToken}
+            </p>
+            {copied && <p style={{ color: "green" }}>{copied}</p>}
+          </div>
         </div>
       )}
       <button
